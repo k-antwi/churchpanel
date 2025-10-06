@@ -48,6 +48,7 @@ class AdminPanelProvider extends PanelProvider
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverResources(in: base_path('app-modules/People/src/Filament/Resources'), for: 'ChurchPanel\\People\\Filament\\Resources')
+            ->discoverResources(in: base_path('app-modules/evangelism-campaign/src/Filament/Resources'), for: 'ChurchPanel\\EvangelismCampaign\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')

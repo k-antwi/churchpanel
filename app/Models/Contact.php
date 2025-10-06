@@ -82,4 +82,10 @@ class Contact extends Model
     {
         return $this->hasMany(WellbeingRecord::class);
     }
+
+    public function evangelismCampaigns()
+    {
+        return $this->belongsToMany(\ChurchPanel\EvangelismCampaign\Models\EvangelismCampaign::class, 'evangelism_campaign_contact')
+            ->withTimestamps();
+    }
 }

@@ -1,0 +1,17 @@
+{
+    "name": "churchpanel/evangelism-campaign",
+    "description": "Evangelism Campaign module for ChurchPanel",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "ChurchPanel\\EvangelismCampaign\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ChurchPanel\\EvangelismCampaign\\EvangelismCampaignServiceProvider"
+            ]
+        }
+    }
+}

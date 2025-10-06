@@ -101,4 +101,22 @@ class User extends WaveUser
     {
         return $this->hasMany(Contact::class, 'captured_by');
     }
+
+    /**
+     * Get evangelism campaigns coordinated by this user.
+     */
+    public function coordinatedCampaigns()
+    {
+        return $this->hasMany(\ChurchPanel\EvangelismCampaign\Models\EvangelismCampaign::class, 'coordinator_id');
+    }
+
+    /**
+     * Get evangelism campaigns where this user is a team member.
+     */
+    public function evangelismCampaigns()
+    {
+        return $this->belongsToMany(\ChurchPanel\EvangelismCampaign\Models\EvangelismCampaign::class, 'evangelism_campaign_user')
+            ->withPivot('role')
+            ->withTimestamps();
+    }
 }

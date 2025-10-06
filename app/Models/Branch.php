@@ -73,4 +73,9 @@ class Branch extends Model
     {
         return $this->hasMany(Contact::class);
     }
+
+    public function evangelismCampaigns()
+    {
+        return $this->hasMany(\ChurchPanel\EvangelismCampaign\Models\EvangelismCampaign::class);
+    }
 }

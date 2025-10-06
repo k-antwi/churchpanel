@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3520e8a3e5ca831ab73a5dc60e0544b3",
+    "content-hash": "4b4ea787c61f7f5c6d48f9d9c47655d4",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -617,6 +617,38 @@
                 }
             ],
             "time": "2024-07-16T11:13:48+00:00"
+        },
+        {
+            "name": "church-panel/evangelism-campaign",
+            "version": "1.0",
+            "dist": {
+                "type": "path",
+                "url": "app-modules/evangelism-campaign",
+                "reference": "fd817bf218fa65e1a437b6bd566362587017d27c"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ChurchPanel\\EvangelismCampaign\\Providers\\EvangelismCampaignServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ChurchPanel\\EvangelismCampaign\\": "src/",
+                    "ChurchPanel\\EvangelismCampaign\\Tests\\": "tests/",
+                    "ChurchPanel\\EvangelismCampaign\\Database\\Factories\\": "database/factories/",
+                    "ChurchPanel\\EvangelismCampaign\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "church-panel/people",

@@ -74,6 +74,11 @@ class Church extends Model
         return $this->hasMany(Contact::class);
     }
 
+    public function evangelismCampaigns()
+    {
+        return $this->hasMany(\ChurchPanel\EvangelismCampaign\Models\EvangelismCampaign::class);
+    }
+
     public function getFullAddressAttribute(): ?string
     {
         $parts = array_filter([
