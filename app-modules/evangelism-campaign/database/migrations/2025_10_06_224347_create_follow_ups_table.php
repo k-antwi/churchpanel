@@ -14,12 +14,15 @@ return new class extends Migration
         Schema::create('follow_ups', function (Blueprint $table) {
             $table->id();
             $table->foreignId('contact_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('method')->nullable(); // phone, email, visit, etc.
-            $table->text('notes')->nullable();
-            $table->timestamp('follow_up_date')->nullable();
-            $table->timestamp('next_follow_up')->nullable();
+            $table->foreignId('evangelism_campaign_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('assigned_to')->nullable()->constrained('users')->nullOnDelete();
+            $table->enum('type', ['phone', 'sms', 'email', 'visit'])->default('phone');
+            $table->timestamp('scheduled_date')->nullable();
+            $table->timestamp('completed_at')->nullable();
             $table->enum('status', ['pending', 'completed', 'cancelled'])->default('pending');
+            $table->text('notes')->nullable();
+            $table->text('outcome')->nullable();
+            $table->text('next_action')->nullable();
             $table->timestamps();
         });
     }

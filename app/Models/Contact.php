@@ -62,10 +62,9 @@ class Contact extends Model
         return $this->belongsTo(User::class, 'captured_by');
     }
 
-    // Placeholder relationships - will be implemented when creating related models
     public function followUps()
     {
-        return $this->hasMany(FollowUp::class);
+        return $this->hasMany(\ChurchPanel\EvangelismCampaign\Models\FollowUp::class);
     }
 
     public function visitations()

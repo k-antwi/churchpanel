@@ -119,4 +119,12 @@ class User extends WaveUser
             ->withPivot('role_id')
             ->withTimestamps();
     }
+
+    /**
+     * Get follow-ups assigned to this user.
+     */
+    public function assignedFollowUps()
+    {
+        return $this->hasMany(\ChurchPanel\EvangelismCampaign\Models\FollowUp::class, 'assigned_to');
+    }
 }

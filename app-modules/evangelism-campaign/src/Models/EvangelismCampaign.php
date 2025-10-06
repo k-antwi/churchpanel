@@ -66,18 +66,7 @@ class EvangelismCampaign extends Model
 
     public function followUps()
     {
-        return $this->hasManyThrough(
-            FollowUp::class,
-            Contact::class,
-            'id',
-            'contact_id',
-            'id',
-            'id'
-        )->whereIn('contact_id', function ($query) {
-            $query->select('contact_id')
-                ->from('evangelism_campaign_contact')
-                ->where('evangelism_campaign_id', $this->id);
-        });
+        return $this->hasMany(FollowUp::class);
     }
 
     public function visitations()
