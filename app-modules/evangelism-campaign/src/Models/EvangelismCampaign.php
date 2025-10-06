@@ -53,8 +53,8 @@ class EvangelismCampaign extends Model
 
     public function teamMembers()
     {
-        return $this->belongsToMany(User::class, 'evangelism_campaign_user')
-            ->withPivot('role')
+        return $this->belongsToMany(User::class, 'evangelism_campaign_team')
+            ->withPivot('role_id')
             ->withTimestamps();
     }
 

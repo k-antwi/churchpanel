@@ -115,8 +115,8 @@ class User extends WaveUser
      */
     public function evangelismCampaigns()
     {
-        return $this->belongsToMany(\ChurchPanel\EvangelismCampaign\Models\EvangelismCampaign::class, 'evangelism_campaign_user')
-            ->withPivot('role')
+        return $this->belongsToMany(\ChurchPanel\EvangelismCampaign\Models\EvangelismCampaign::class, 'evangelism_campaign_team')
+            ->withPivot('role_id')
             ->withTimestamps();
     }
 }

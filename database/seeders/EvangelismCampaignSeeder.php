@@ -9,6 +9,7 @@ use App\Models\User;
 use ChurchPanel\EvangelismCampaign\Models\EvangelismCampaign;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class EvangelismCampaignSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class EvangelismCampaignSeeder extends Seeder
     {
         $churches = Church::all();
         $users = User::all();
+        $roles = Role::all();
 
         if ($churches->isEmpty() || $users->isEmpty()) {
             $this->command->info('Please seed churches and users first.');
@@ -101,7 +103,7 @@ class EvangelismCampaignSeeder extends Seeder
                 $teamMembers = $users->random($teamMemberCount);
                 foreach ($teamMembers as $member) {
                     $campaign->teamMembers()->attach($member->id, [
-                        'role' => fake()->randomElement(['team_member', 'leader', 'volunteer']),
+                        'role_id' => $roles->isNotEmpty() ? $roles->random()->id : null,
                     ]);
                 }
             }

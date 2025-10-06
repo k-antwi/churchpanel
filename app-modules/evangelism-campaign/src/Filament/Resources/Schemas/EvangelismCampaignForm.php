@@ -3,6 +3,7 @@
 namespace ChurchPanel\EvangelismCampaign\Filament\Resources\Schemas;
 
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -97,6 +98,17 @@ class EvangelismCampaignForm
                             ->step(0.01),
                     ])
                     ->columns(3),
+
+                Section::make('Team Members')
+                    ->schema([
+                        Select::make('teamMembers')
+                            ->relationship('teamMembers', 'name')
+                            ->multiple()
+                            ->searchable()
+                            ->preload()
+                            ->label('Select Team Members'),
+                    ])
+                    ->collapsible(),
             ]);
     }
 }
