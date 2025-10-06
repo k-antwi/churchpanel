@@ -76,4 +76,21 @@ class User extends WaveUser
     {
         return $this->belongsTo(\ChurchPanel\People\Models\Person::class);
     }
+
+    /**
+     * Get the branches where this user is assigned.
+     */
+    public function branches()
+    {
+        return $this->belongsToMany(Branch::class, 'branch_user')
+            ->withTimestamps();
+    }
+
+    /**
+     * Get branches where this user is the pastor.
+     */
+    public function pastorBranches()
+    {
+        return $this->hasMany(Branch::class, 'pastor_id');
+    }
 }

@@ -64,6 +64,11 @@ class Church extends Model
         return $this->belongsTo(User::class, 'pastor_id');
     }
 
+    public function branches()
+    {
+        return $this->hasMany(Branch::class);
+    }
+
     public function getFullAddressAttribute(): ?string
     {
         $parts = array_filter([

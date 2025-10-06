@@ -49,6 +49,12 @@ class Person extends Model
         return $this->hasOne(\App\Models\User::class);
     }
 
+    public function branches()
+    {
+        return $this->belongsToMany(\App\Models\Branch::class, 'branch_contacts')
+            ->withTimestamps();
+    }
+
     public function getFullNameAttribute(): string
     {
         return trim("{$this->title} {$this->first_name} {$this->last_name}");
