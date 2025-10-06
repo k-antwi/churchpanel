@@ -1,0 +1,24 @@
+{
+	"name": "church-panel/people",
+	"description": "",
+	"type": "library",
+	"version": "1.0",
+	"license": "proprietary",
+	"require": {},
+	"autoload": {
+		"psr-4": {
+			"ChurchPanel\\People\\": "src/",
+			"ChurchPanel\\People\\Tests\\": "tests/",
+			"ChurchPanel\\People\\Database\\Factories\\": "database/factories/",
+			"ChurchPanel\\People\\Database\\Seeders\\": "database/seeders/"
+		}
+	},
+	"minimum-stability": "stable",
+	"extra": {
+		"laravel": {
+			"providers": [
+				"ChurchPanel\\People\\Providers\\PeopleServiceProvider"
+			]
+		}
+	}
+}
