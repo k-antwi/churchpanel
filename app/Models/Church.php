@@ -69,6 +69,11 @@ class Church extends Model
         return $this->hasMany(Branch::class);
     }
 
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
+    }
+
     public function getFullAddressAttribute(): ?string
     {
         $parts = array_filter([

@@ -57,7 +57,7 @@ class Branch extends Model
         return $this->belongsTo(User::class, 'pastor_id');
     }
 
-    public function contacts()
+    public function people()
     {
         return $this->belongsToMany(Person::class, 'branch_contacts')
             ->withTimestamps();
@@ -67,5 +67,10 @@ class Branch extends Model
     {
         return $this->belongsToMany(User::class, 'branch_user')
             ->withTimestamps();
+    }
+
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
     }
 }

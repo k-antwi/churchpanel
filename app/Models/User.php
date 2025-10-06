@@ -93,4 +93,12 @@ class User extends WaveUser
     {
         return $this->hasMany(Branch::class, 'pastor_id');
     }
+
+    /**
+     * Get contacts captured by this user.
+     */
+    public function capturedContacts()
+    {
+        return $this->hasMany(Contact::class, 'captured_by');
+    }
 }
