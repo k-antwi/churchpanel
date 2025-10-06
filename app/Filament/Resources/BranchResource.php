@@ -20,6 +20,7 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
+use UnitEnum;
 
 class BranchResource extends Resource
 {
@@ -32,6 +33,10 @@ class BranchResource extends Resource
     protected static ?string $modelLabel = 'Branch';
 
     protected static ?string $pluralModelLabel = 'Branches';
+
+    protected static UnitEnum|string|null $navigationGroup = 'Church Management';
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Schema $schema): Schema
     {

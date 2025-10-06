@@ -15,6 +15,7 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use UnitEnum;
 
 class PersonResource extends Resource
 {
@@ -29,6 +30,10 @@ class PersonResource extends Resource
     protected static ?string $modelLabel = 'Person';
 
     protected static ?string $pluralModelLabel = 'People';
+
+    protected static UnitEnum|string|null $navigationGroup = 'Church Management';
+
+    protected static ?int $navigationSort = 3;
 
     public static function form(Schema $schema): Schema
     {

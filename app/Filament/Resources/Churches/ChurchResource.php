@@ -34,6 +34,7 @@ use Filament\Actions\RestoreBulkAction;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
+use UnitEnum;
 
 class ChurchResource extends Resource
 {
@@ -48,6 +49,8 @@ class ChurchResource extends Resource
     protected static ?string $pluralModelLabel = 'Churches';
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    protected static UnitEnum|string|null $navigationGroup = 'Church Management';
 
     protected static ?int $navigationSort = 1;
 
