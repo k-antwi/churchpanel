@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b819356bef46acaf7deeba3de1ddb91",
+    "content-hash": "3520e8a3e5ca831ab73a5dc60e0544b3",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -617,6 +617,38 @@
                 }
             ],
             "time": "2024-07-16T11:13:48+00:00"
+        },
+        {
+            "name": "church-panel/people",
+            "version": "1.0",
+            "dist": {
+                "type": "path",
+                "url": "app-modules/people",
+                "reference": "0abea6df4cbb1eab2fc323b4456ca67eae0ff492"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ChurchPanel\\People\\Providers\\PeopleServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ChurchPanel\\People\\": "src/",
+                    "ChurchPanel\\People\\Tests\\": "tests/",
+                    "ChurchPanel\\People\\Database\\Factories\\": "database/factories/",
+                    "ChurchPanel\\People\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "codeat3/blade-phosphor-icons",

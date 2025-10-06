@@ -18,7 +18,7 @@ return [
 	|
 	*/
 	
-	'modules_namespace' => 'Modules',
+	'modules_namespace' => 'ChurchPanel',
 	
 	/*
 	|--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ return [
 	|
 	*/
 	
-	'modules_vendor' => null,
+	'modules_vendor' => 'church-panel',
 	
 	/*
 	|--------------------------------------------------------------------------
@@ -90,5 +90,5 @@ return [
 	| the presence of event discovery.
 	*/
 	
-	'should_discover_events' => null,
+	'should_discover_events' => true,
 ];

@@ -13,6 +13,7 @@
         "php": "^8.2",
         "ext-exif": "*",
         "ext-gd": "*",
+        "church-panel/people": "*",
         "codeat3/blade-phosphor-icons": "^2.0",
         "devdojo/app": "0.11.0",
         "devdojo/auth": "^1.0",
@@ -98,5 +99,14 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "app-modules/*",
+            "options": {
+                "symlink": true
+            }
+        }
+    ]
 }
