@@ -28,6 +28,7 @@ class User extends WaveUser
         'verification_code',
         'verified',
         'trial_ends_at',
+        'person_id',
     ];
 
     /**
@@ -66,5 +67,13 @@ class User extends WaveUser
             // Assign the default role
             $user->assignRole(config('wave.default_user_role', 'registered'));
         });
+    }
+
+    /**
+     * Get the person that owns the user.
+     */
+    public function person()
+    {
+        return $this->belongsTo(\ChurchPanel\People\Models\Person::class);
     }
 }

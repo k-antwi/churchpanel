@@ -44,6 +44,11 @@ class Person extends Model
         return $this->belongsTo(\App\Models\Church::class);
     }
 
+    public function user()
+    {
+        return $this->hasOne(\App\Models\User::class);
+    }
+
     public function getFullNameAttribute(): string
     {
         return trim("{$this->title} {$this->first_name} {$this->last_name}");
