@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Branch;
-use App\Models\Church;
-use App\Models\Contact;
+use ChurchPanel\CpCore\Models\Branch;
+use ChurchPanel\CpCore\Models\Church;
+use ChurchPanel\CpCore\Models\Contact;
 use App\Models\User;
 use ChurchPanel\EvangelismCampaign\Models\EvangelismCampaign;
 use ChurchPanel\People\Models\Person;

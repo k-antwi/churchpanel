@@ -1,0 +1,24 @@
+{
+    "name": "church-panel/cp-core",
+    "description": "Core module for ChurchPanel",
+    "type": "library",
+    "version": "1.0",
+    "license": "proprietary",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "ChurchPanel\\CpCore\\": "src/",
+            "ChurchPanel\\CpCore\\Tests\\": "tests/",
+            "ChurchPanel\\CpCore\\Database\\Factories\\": "database/factories/",
+            "ChurchPanel\\CpCore\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "minimum-stability": "stable",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ChurchPanel\\CpCore\\Providers\\CpCoreServiceProvider"
+            ]
+        }
+    }
+}

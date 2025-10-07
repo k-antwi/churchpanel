@@ -2,9 +2,9 @@
 
 namespace ChurchPanel\EvangelismCampaign\Models;
 
-use App\Models\Branch;
-use App\Models\Church;
-use App\Models\Contact;
+use ChurchPanel\CpCore\Models\Branch;
+use ChurchPanel\CpCore\Models\Church;
+use ChurchPanel\CpCore\Models\Contact;
 use App\Models\FollowUp;
 use App\Models\User;
 use App\Models\Visitation;

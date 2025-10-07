@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ff192935b14b655229d53c32584ea6c",
+    "content-hash": "4ce8a63217561f55910276599bc2f720",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -645,6 +645,39 @@
             "license": [
                 "proprietary"
             ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "church-panel/cp-core",
+            "version": "1.0",
+            "dist": {
+                "type": "path",
+                "url": "app-modules/cp-core",
+                "reference": "1325c48dda0fafbebb28a3e185676aac43db5305"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ChurchPanel\\CpCore\\Providers\\CpCoreServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ChurchPanel\\CpCore\\": "src/",
+                    "ChurchPanel\\CpCore\\Tests\\": "tests/",
+                    "ChurchPanel\\CpCore\\Database\\Factories\\": "database/factories/",
+                    "ChurchPanel\\CpCore\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "Core module for ChurchPanel",
             "transport-options": {
                 "symlink": true,
                 "relative": true

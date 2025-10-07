@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Branch;
-use App\Models\Church;
+use ChurchPanel\CpCore\Models\Branch;
+use ChurchPanel\CpCore\Models\Church;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;

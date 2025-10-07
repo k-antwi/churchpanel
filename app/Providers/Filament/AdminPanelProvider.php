@@ -47,6 +47,7 @@ class AdminPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
+            ->discoverResources(in: base_path('app-modules/cp-core/src/Filament/Resources'), for: 'ChurchPanel\\CpCore\\Filament\\Resources')
             ->discoverResources(in: base_path('app-modules/People/src/Filament/Resources'), for: 'ChurchPanel\\People\\Filament\\Resources')
             ->discoverResources(in: base_path('app-modules/evangelism-campaign/src/Filament/Resources'), for: 'ChurchPanel\\EvangelismCampaign\\Filament\\Resources')
             ->discoverResources(in: base_path('app-modules/audit-trail/src/Filament/Resources'), for: 'ChurchPanel\\AuditTrail\\Filament\\Resources')

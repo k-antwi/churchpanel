@@ -41,7 +41,7 @@ class Person extends Model
 
     public function church()
     {
-        return $this->belongsTo(\App\Models\Church::class);
+        return $this->belongsTo(\ChurchPanel\CpCore\Models\Church::class);
     }
 
     public function user()
@@ -51,13 +51,13 @@ class Person extends Model
 
     public function branches()
     {
-        return $this->belongsToMany(\App\Models\Branch::class, 'branch_contacts')
+        return $this->belongsToMany(\ChurchPanel\CpCore\Models\Branch::class, 'branch_contacts')
             ->withTimestamps();
     }
 
     public function contacts()
     {
-        return $this->hasMany(\App\Models\Contact::class);
+        return $this->hasMany(\ChurchPanel\CpCore\Models\Contact::class);
     }
 
     public function getFullNameAttribute(): string

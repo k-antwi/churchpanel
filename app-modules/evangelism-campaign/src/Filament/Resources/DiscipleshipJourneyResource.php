@@ -6,7 +6,7 @@ use ChurchPanel\EvangelismCampaign\Filament\Resources\DiscipleshipJourneyResourc
 use ChurchPanel\EvangelismCampaign\Filament\Resources\DiscipleshipJourneyResource\Pages\EditDiscipleshipJourney;
 use ChurchPanel\EvangelismCampaign\Filament\Resources\DiscipleshipJourneyResource\Pages\ListDiscipleshipJourneys;
 use ChurchPanel\EvangelismCampaign\Models\DiscipleshipJourney;
-use App\Models\Contact;
+use ChurchPanel\CpCore\Models\Contact;
 use App\Models\User;
 use BackedEnum;
 use Filament\Forms\Components\DateTimePicker;
