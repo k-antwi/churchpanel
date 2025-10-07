@@ -60,6 +60,11 @@ class Person extends Model
         return $this->hasMany(\ChurchPanel\CpCore\Models\Contact::class);
     }
 
+    public function wellbeingRecords()
+    {
+        return $this->morphMany(WellbeingRecord::class, 'recordable');
+    }
+
     public function getFullNameAttribute(): string
     {
         return trim("{$this->title} {$this->first_name} {$this->last_name}");

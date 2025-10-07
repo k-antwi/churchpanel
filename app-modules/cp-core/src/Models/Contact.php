@@ -93,7 +93,7 @@ class Contact extends Model
 
     public function wellbeingRecords()
     {
-        return $this->hasMany(WellbeingRecord::class);
+        return $this->morphMany(\ChurchPanel\People\Models\WellbeingRecord::class, 'recordable');
     }
 
     public function evangelismCampaigns()
