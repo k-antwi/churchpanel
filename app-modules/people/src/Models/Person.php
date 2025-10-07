@@ -57,7 +57,7 @@ class Person extends Model
 
     public function contacts()
     {
-        return $this->hasMany(\ChurchPanel\CpCore\Models\Contact::class);
+        return $this->hasMany(\ChurchPanel\People\Models\Contact::class);
     }
 
     public function wellbeingRecords()

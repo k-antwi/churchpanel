@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use ChurchPanel\CpCore\Models\Contact;
+use ChurchPanel\People\Models\Contact;
 use ChurchPanel\People\Models\Person;
 use ChurchPanel\People\Models\WellbeingRecord;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;

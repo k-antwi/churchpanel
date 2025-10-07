@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use ChurchPanel\CpCore\Models\Branch;
 use ChurchPanel\CpCore\Models\Church;
-use ChurchPanel\CpCore\Models\Contact;
+use ChurchPanel\People\Models\Contact;
 use App\Models\User;
 use ChurchPanel\EvangelismCampaign\Models\EvangelismCampaign;
 use ChurchPanel\People\Models\Person;

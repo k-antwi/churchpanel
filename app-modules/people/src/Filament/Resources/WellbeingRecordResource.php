@@ -6,7 +6,7 @@ use BackedEnum;
 use ChurchPanel\People\Filament\Resources\WellbeingRecordResource\Pages;
 use ChurchPanel\People\Models\Person;
 use ChurchPanel\People\Models\WellbeingRecord;
-use ChurchPanel\CpCore\Models\Contact;
+use ChurchPanel\People\Models\Contact;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;

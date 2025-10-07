@@ -31,9 +31,9 @@ class PersonResource extends Resource
 
     protected static ?string $pluralModelLabel = 'People';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Church Management';
+    protected static UnitEnum|string|null $navigationGroup = 'People Management';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 1;
 
     public static function form(Schema $schema): Schema
     {

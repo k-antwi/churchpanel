@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use ChurchPanel\CpCore\Models\Contact;
+use ChurchPanel\People\Models\Contact;
 use App\Models\User;
 use ChurchPanel\EvangelismCampaign\Models\EvangelismCampaign;
 use ChurchPanel\EvangelismCampaign\Models\FollowUp;

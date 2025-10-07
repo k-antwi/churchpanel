@@ -2,7 +2,7 @@
 
 namespace ChurchPanel\EvangelismCampaign\Models;
 
-use ChurchPanel\CpCore\Models\Contact;
+use ChurchPanel\People\Models\Contact;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

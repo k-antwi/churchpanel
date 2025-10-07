@@ -1,10 +1,11 @@
 <?php
 
-namespace ChurchPanel\CpCore\Models;
+namespace ChurchPanel\People\Models;
 
 use App\Models\User;
 use ChurchPanel\AuditTrail\Traits\Auditable;
-use ChurchPanel\People\Models\Person;
+use ChurchPanel\CpCore\Models\Church;
+use ChurchPanel\CpCore\Models\Branch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

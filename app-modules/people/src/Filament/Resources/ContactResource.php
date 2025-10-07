@@ -1,9 +1,9 @@
 <?php
 
-namespace ChurchPanel\CpCore\Filament\Resources;
+namespace ChurchPanel\People\Filament\Resources;
 
-use ChurchPanel\CpCore\Filament\Resources\ContactResource\Pages;
-use ChurchPanel\CpCore\Models\Contact;
+use ChurchPanel\People\Filament\Resources\ContactResource\Pages;
+use ChurchPanel\People\Models\Contact;
 use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
@@ -35,9 +35,9 @@ class ContactResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Contacts';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Church Management';
+    protected static UnitEnum|string|null $navigationGroup = 'People Management';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 2;
 
     public static function form(Schema $schema): Schema
     {
