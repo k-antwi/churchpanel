@@ -1,0 +1,24 @@
+{
+	"name": "church-panel/audit-trail",
+	"description": "",
+	"type": "library",
+	"version": "1.0",
+	"license": "proprietary",
+	"require": {},
+	"autoload": {
+		"psr-4": {
+			"ChurchPanel\\AuditTrail\\": "src/",
+			"ChurchPanel\\AuditTrail\\Tests\\": "tests/",
+			"ChurchPanel\\AuditTrail\\Database\\Factories\\": "database/factories/",
+			"ChurchPanel\\AuditTrail\\Database\\Seeders\\": "database/seeders/"
+		}
+	},
+	"minimum-stability": "stable",
+	"extra": {
+		"laravel": {
+			"providers": [
+				"ChurchPanel\\AuditTrail\\Providers\\AuditTrailServiceProvider"
+			]
+		}
+	}
+}

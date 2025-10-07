@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use ChurchPanel\AuditTrail\Traits\Auditable;
 use ChurchPanel\People\Models\Person;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
 {
-    use HasFactory;
+    use HasFactory, Auditable;
 
     protected $fillable = [
         'church_id',

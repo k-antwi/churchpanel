@@ -1,12 +1,19 @@
 {
-    "name": "churchpanel/evangelism-campaign",
+    "name": "church-panel/evangelism-campaign",
     "description": "Evangelism Campaign module for ChurchPanel",
     "type": "library",
+    "version": "1.0",
+    "license": "proprietary",
+    "require": {},
     "autoload": {
         "psr-4": {
-            "ChurchPanel\\EvangelismCampaign\\": "src/"
+            "ChurchPanel\\EvangelismCampaign\\": "src/",
+            "ChurchPanel\\EvangelismCampaign\\Tests\\": "tests/",
+            "ChurchPanel\\EvangelismCampaign\\Database\\Factories\\": "database/factories/",
+            "ChurchPanel\\EvangelismCampaign\\Database\\Seeders\\": "database/seeders/"
         }
     },
+    "minimum-stability": "stable",
     "extra": {
         "laravel": {
             "providers": [

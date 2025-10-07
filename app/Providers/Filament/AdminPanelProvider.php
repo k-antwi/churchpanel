@@ -49,6 +49,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverResources(in: base_path('app-modules/People/src/Filament/Resources'), for: 'ChurchPanel\\People\\Filament\\Resources')
             ->discoverResources(in: base_path('app-modules/evangelism-campaign/src/Filament/Resources'), for: 'ChurchPanel\\EvangelismCampaign\\Filament\\Resources')
+            ->discoverResources(in: base_path('app-modules/audit-trail/src/Filament/Resources'), for: 'ChurchPanel\\AuditTrail\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
