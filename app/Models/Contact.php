@@ -74,7 +74,7 @@ class Contact extends Model
 
     public function discipleshipJourneys()
     {
-        return $this->hasMany(DiscipleshipJourney::class);
+        return $this->hasMany(\ChurchPanel\EvangelismCampaign\Models\DiscipleshipJourney::class);
     }
 
     public function wellbeingRecords()

@@ -127,4 +127,12 @@ class User extends WaveUser
     {
         return $this->hasMany(\ChurchPanel\EvangelismCampaign\Models\FollowUp::class, 'assigned_to');
     }
+
+    /**
+     * Get discipleship journeys mentored by this user.
+     */
+    public function mentoredJourneys()
+    {
+        return $this->hasMany(\ChurchPanel\EvangelismCampaign\Models\DiscipleshipJourney::class, 'mentor_id');
+    }
 }
