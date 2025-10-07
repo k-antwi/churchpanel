@@ -16,6 +16,7 @@
         "church-panel/audit-trail": "*",
         "church-panel/cp-core": "*",
         "church-panel/evangelism-campaign": "*",
+        "church-panel/events": "*",
         "church-panel/people": "*",
         "codeat3/blade-phosphor-icons": "^2.0",
         "devdojo/app": "0.11.0",

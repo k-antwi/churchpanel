@@ -79,4 +79,9 @@ class Branch extends Model
     {
         return $this->hasMany(\ChurchPanel\EvangelismCampaign\Models\EvangelismCampaign::class);
     }
+
+    public function serviceTypes()
+    {
+        return $this->hasMany(\ChurchPanel\Events\Models\ServiceType::class);
+    }
 }

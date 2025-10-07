@@ -1,0 +1,22 @@
+{
+    "name": "church-panel/events",
+    "description": "Events module for ChurchPanel",
+    "type": "library",
+    "version": "1.0",
+    "autoload": {
+        "psr-4": {
+            "ChurchPanel\\Events\\": "src/",
+            "ChurchPanel\\Events\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "require": {
+        "php": "^8.2"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ChurchPanel\\Events\\Providers\\EventsServiceProvider"
+            ]
+        }
+    }
+}

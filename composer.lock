@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ce8a63217561f55910276599bc2f720",
+    "content-hash": "314513489e18b9742c7a6c91a262c5a2",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -711,6 +711,37 @@
                 "proprietary"
             ],
             "description": "Evangelism Campaign module for ChurchPanel",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "church-panel/events",
+            "version": "1.0",
+            "dist": {
+                "type": "path",
+                "url": "app-modules/events",
+                "reference": "8e47d4275ff526024c62f5820fa911c8da25936f"
+            },
+            "require": {
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ChurchPanel\\Events\\Providers\\EventsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ChurchPanel\\Events\\": "src/",
+                    "ChurchPanel\\Events\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "description": "Events module for ChurchPanel",
             "transport-options": {
                 "symlink": true,
                 "relative": true

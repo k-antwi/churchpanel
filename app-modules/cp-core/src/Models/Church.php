@@ -80,6 +80,16 @@ class Church extends Model
         return $this->hasMany(\ChurchPanel\EvangelismCampaign\Models\EvangelismCampaign::class);
     }
 
+    public function serviceTypes()
+    {
+        return $this->hasManyThrough(
+            \ChurchPanel\Events\Models\ServiceType::class,
+            Branch::class,
+            'church_id',
+            'branch_id'
+        );
+    }
+
     public function getFullAddressAttribute(): ?string
     {
         $parts = array_filter([
