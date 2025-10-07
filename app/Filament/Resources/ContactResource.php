@@ -61,9 +61,9 @@ class ContactResource extends Resource
                         Select::make('person_id')
                             ->relationship('person', 'first_name')
                             ->getOptionLabelFromRecordUsing(fn ($record) => $record->full_name)
-                            ->required()
                             ->searchable()
-                            ->preload(),
+                            ->preload()
+                            ->label('Link to Person (Optional)'),
 
                         Select::make('stage')
                             ->options([
@@ -74,6 +74,34 @@ class ContactResource extends Resource
                             ])
                             ->required()
                             ->default('prospect'),
+                    ])
+                    ->columns(2),
+
+                Section::make('Personal Details')
+                    ->schema([
+                        TextInput::make('first_name')
+                            ->required()
+                            ->maxLength(255),
+
+                        TextInput::make('last_name')
+                            ->required()
+                            ->maxLength(255),
+
+                        TextInput::make('email')
+                            ->email()
+                            ->maxLength(255),
+
+                        TextInput::make('mobile')
+                            ->tel()
+                            ->maxLength(255),
+
+                        TextInput::make('social_handle')
+                            ->maxLength(255)
+                            ->label('Social Handle'),
+
+                        Textarea::make('address')
+                            ->rows(3)
+                            ->columnSpanFull(),
                     ])
                     ->columns(2),
 
@@ -145,9 +173,23 @@ class ContactResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('person.full_name')
-                    ->searchable(['first_name', 'last_name'])
+                TextColumn::make('first_name')
+                    ->searchable()
                     ->sortable(),
+
+                TextColumn::make('last_name')
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('email')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(),
+
+                TextColumn::make('mobile')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(),
 
                 TextColumn::make('church.name')
                     ->searchable()
