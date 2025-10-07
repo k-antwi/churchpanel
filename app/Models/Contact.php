@@ -13,6 +13,7 @@ class Contact extends Model
     protected $fillable = [
         'church_id',
         'branch_id',
+        'evangelism_campaign_id',
         'person_id',
         'first_name',
         'last_name',
@@ -68,6 +69,11 @@ class Contact extends Model
         return $this->belongsTo(User::class, 'captured_by');
     }
 
+    public function capturedInCampaign()
+    {
+        return $this->belongsTo(\ChurchPanel\EvangelismCampaign\Models\EvangelismCampaign::class, 'evangelism_campaign_id');
+    }
+
     public function followUps()
     {
         return $this->hasMany(\ChurchPanel\EvangelismCampaign\Models\FollowUp::class);
@@ -92,5 +98,51 @@ class Contact extends Model
     {
         return $this->belongsToMany(\ChurchPanel\EvangelismCampaign\Models\EvangelismCampaign::class, 'evangelism_campaign_contact')
             ->withTimestamps();
+    }
+
+    /**
+     * Graduate this contact to the people table
+     */
+    public function graduate(): \ChurchPanel\People\Models\Person
+    {
+        // If already linked to a person, update that person's data
+        if ($this->person_id) {
+            $person = $this->person;
+            $person->update([
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
+                'email' => $this->email ?? $person->email,
+                'address_line' => $this->address ?? $person->address_line,
+                'mobile_phone' => $this->mobile ?? $person->mobile_phone,
+            ]);
+        } else {
+            // Create a new person record
+            $person = \ChurchPanel\People\Models\Person::create([
+                'church_id' => $this->church_id,
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
+                'email' => $this->email,
+                'address_line' => $this->address,
+                'mobile_phone' => $this->mobile,
+                'type' => 'member',
+            ]);
+
+            // Link the contact to the person
+            $this->person_id = $person->id;
+        }
+
+        // Mark contact as graduated
+        $this->stage = 'graduated';
+        $this->save();
+
+        return $person;
+    }
+
+    /**
+     * Check if contact is graduated
+     */
+    public function isGraduated(): bool
+    {
+        return $this->stage === 'graduated';
     }
 }

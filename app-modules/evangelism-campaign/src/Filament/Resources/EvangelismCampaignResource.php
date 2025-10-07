@@ -2,6 +2,7 @@
 
 namespace ChurchPanel\EvangelismCampaign\Filament\Resources;
 
+use ChurchPanel\EvangelismCampaign\Filament\Resources\EvangelismCampaignResource\RelationManagers\CapturedContactsRelationManager;
 use ChurchPanel\EvangelismCampaign\Filament\Resources\Pages\CreateEvangelismCampaign;
 use ChurchPanel\EvangelismCampaign\Filament\Resources\Pages\EditEvangelismCampaign;
 use ChurchPanel\EvangelismCampaign\Filament\Resources\Pages\ListEvangelismCampaigns;
@@ -45,7 +46,7 @@ class EvangelismCampaignResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            CapturedContactsRelationManager::class,
         ];
     }
 

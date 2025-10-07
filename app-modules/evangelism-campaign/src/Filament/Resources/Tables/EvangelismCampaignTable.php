@@ -82,6 +82,12 @@ class EvangelismCampaignTable
                     ->toggleable()
                     ->getStateUsing(fn ($record) => $record->progress_percentage . '%'),
 
+                TextColumn::make('capturedContacts_count')
+                    ->label('Contacts Captured')
+                    ->counts('capturedContacts')
+                    ->sortable()
+                    ->toggleable(),
+
                 TextColumn::make('coordinator.name')
                     ->searchable()
                     ->sortable()

@@ -64,6 +64,11 @@ class EvangelismCampaign extends Model
             ->withTimestamps();
     }
 
+    public function capturedContacts()
+    {
+        return $this->hasMany(Contact::class, 'evangelism_campaign_id');
+    }
+
     public function followUps()
     {
         return $this->hasMany(FollowUp::class);

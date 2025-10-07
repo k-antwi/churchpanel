@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ContactResource\Pages;
 use App\Models\Contact;
 use BackedEnum;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -12,6 +13,7 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -71,9 +73,11 @@ class ContactResource extends Resource
                                 'new_convert' => 'New Convert',
                                 'believer' => 'Believer',
                                 'member' => 'Member',
+                                'graduated' => 'Graduated',
                             ])
                             ->required()
-                            ->default('prospect'),
+                            ->default('prospect')
+                            ->disabled(fn ($record) => $record?->stage === 'graduated'),
                     ])
                     ->columns(2),
 
@@ -147,6 +151,12 @@ class ContactResource extends Resource
                             ])
                             ->searchable(),
 
+                        Select::make('evangelism_campaign_id')
+                            ->relationship('capturedInCampaign', 'title')
+                            ->label('Captured in Campaign')
+                            ->searchable()
+                            ->preload(),
+
                         Select::make('captured_by')
                             ->relationship('capturedBy', 'name')
                             ->searchable()
@@ -158,7 +168,7 @@ class ContactResource extends Resource
                             ->label('Captured At')
                             ->default(now()),
                     ])
-                    ->columns(3),
+                    ->columns(2),
 
                 Section::make('Notes')
                     ->schema([
@@ -201,6 +211,13 @@ class ContactResource extends Resource
                     ->sortable()
                     ->toggleable(),
 
+                TextColumn::make('capturedInCampaign.title')
+                    ->label('Campaign')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable()
+                    ->placeholder('—'),
+
                 TextColumn::make('stage')
                     ->badge()
                     ->colors([
@@ -208,6 +225,7 @@ class ContactResource extends Resource
                         'success' => 'member',
                         'warning' => 'new_convert',
                         'info' => 'believer',
+                        'purple' => 'graduated',
                     ])
                     ->searchable()
                     ->sortable(),
@@ -254,6 +272,7 @@ class ContactResource extends Resource
                         'new_convert' => 'New Convert',
                         'believer' => 'Believer',
                         'member' => 'Member',
+                        'graduated' => 'Graduated',
                     ]),
                 Tables\Filters\SelectFilter::make('age_group')
                     ->options([
@@ -274,6 +293,32 @@ class ContactResource extends Resource
                     ]),
             ])
             ->recordActions([
+                Action::make('graduate')
+                    ->label('Graduate to People')
+                    ->icon('heroicon-o-academic-cap')
+                    ->color('success')
+                    ->requiresConfirmation()
+                    ->modalHeading('Graduate Contact to People')
+                    ->modalDescription('This will create or update a person record with the contact\'s information and mark the contact as graduated.')
+                    ->modalSubmitActionLabel('Graduate')
+                    ->visible(fn (Contact $record) => !$record->isGraduated())
+                    ->action(function (Contact $record) {
+                        try {
+                            $person = $record->graduate();
+
+                            Notification::make()
+                                ->title('Contact graduated successfully')
+                                ->body("Contact has been graduated to person: {$person->full_name}")
+                                ->success()
+                                ->send();
+                        } catch (\Exception $e) {
+                            Notification::make()
+                                ->title('Graduation failed')
+                                ->body($e->getMessage())
+                                ->danger()
+                                ->send();
+                        }
+                    }),
                 EditAction::make(),
             ])
             ->toolbarActions([
