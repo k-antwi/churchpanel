@@ -33,42 +33,137 @@ class DiscipleshipJourneySeeder extends Seeder
             'serving'
         ];
 
-        $materials = [
-            'New Believer\'s Guide',
-            'Baptism Class Workbook',
-            'Foundation Course Materials',
-            'Membership Manual',
-            'Spiritual Growth Book',
-            'Leadership Training Guide',
-            'Ministry Handbook',
+        $stageMaterials = [
+            'new_convert' => ['New Believer Booklet', 'Gospel of John', 'Welcome Pack'],
+            'baptism_prep' => ['Baptism Guide', 'Water Baptism DVD', 'Testimony Form'],
+            'baptized' => ['Certificate of Baptism', 'New Life in Christ Book'],
+            'foundation_class' => ['Foundation Course Workbook', 'Bible Study Guide', 'Prayer Journal'],
+            'membership_class' => ['Church Covenant', 'Membership Manual', 'Statement of Faith'],
+            'maturity_class' => ['Spiritual Growth Curriculum', 'Daily Devotional', 'Bible Reading Plan'],
+            'leadership_training' => ['Leadership Handbook', 'Servant Leadership Book', 'Ministry Guidelines'],
+            'serving' => ['Ministry Assignment', 'Volunteer Handbook', 'Team Directory'],
         ];
 
-        foreach ($contacts->random(min(30, $contacts->count())) as $contact) {
-            $journeyCount = rand(1, 3);
+        $journeysCreated = 0;
 
-            for ($i = 0; $i < $journeyCount; $i++) {
-                $startedAt = fake()->dateTimeBetween('-1 year', 'now');
-                $isCompleted = fake()->boolean(60);
+        // Create journeys for 60% of contacts
+        $contactsWithJourneys = $contacts->random(min((int)($contacts->count() * 0.6), $contacts->count()));
 
+        foreach ($contactsWithJourneys as $contact) {
+            // Each contact gets 1-3 progressive journey stages
+            $numberOfStages = rand(1, 3);
+            $contactStages = array_slice($stages, 0, $numberOfStages);
+
+            foreach ($contactStages as $index => $stage) {
+                $startedAt = now()->subMonths(rand(1, 24))->subDays(rand(0, 30));
+
+                // 70% of journeys are completed for earlier stages
+                $isCompleted = $index < $numberOfStages - 1 || rand(0, 100) < 70;
+                $completedAt = $isCompleted
+                    ? $startedAt->copy()->addWeeks(rand(4, 12))
+                    : null;
+
+                // Build materials given array
                 $materialsGiven = [];
-                $materialCount = rand(1, 3);
-                for ($j = 0; $j < $materialCount; $j++) {
+                $materials = $stageMaterials[$stage] ?? [];
+                foreach ($materials as $material) {
                     $materialsGiven[] = [
-                        'material' => fake()->randomElement($materials),
-                        'date' => fake()->dateTimeBetween($startedAt, 'now')->format('Y-m-d'),
+                        'material' => $material,
+                        'date' => $startedAt->copy()->addDays(rand(0, 7))->format('Y-m-d'),
                     ];
                 }
 
+                // Generate stage-specific notes
+                $notes = $this->generateNotes($stage, $isCompleted);
+
                 DiscipleshipJourney::create([
                     'contact_id' => $contact->id,
-                    'stage' => fake()->randomElement($stages),
+                    'stage' => $stage,
                     'started_at' => $startedAt,
-                    'completed_at' => $isCompleted ? fake()->dateTimeBetween($startedAt, 'now') : null,
+                    'completed_at' => $completedAt,
                     'mentor_id' => $users->random()->id,
-                    'notes' => fake()->optional()->paragraph(),
+                    'notes' => $notes,
                     'materials_given' => $materialsGiven,
                 ]);
+
+                $journeysCreated++;
             }
         }
+
+        $this->command->info("Created {$journeysCreated} discipleship journeys for {$contactsWithJourneys->count()} contact(s).");
+    }
+
+    private function generateNotes(string $stage, bool $isCompleted): string
+    {
+        $progressNotes = [
+            'new_convert' => [
+                'Attended salvation prayer session',
+                'Shared testimony with small group',
+                'Regular attendance at Sunday services',
+                'Completed initial counseling session',
+                'Connected with welcome team',
+            ],
+            'baptism_prep' => [
+                'Completed baptism class',
+                'Testimony prepared and reviewed',
+                'Understanding of water baptism confirmed',
+                'Family invited to baptism service',
+                'Baptism scheduled',
+            ],
+            'baptized' => [
+                'Water baptism completed',
+                'Testimony shared during service',
+                'Family members attended',
+                'Photos and video taken',
+                'Certificate presented',
+            ],
+            'foundation_class' => [
+                'Enrolled in foundation class',
+                'Attending weekly sessions',
+                'Completing homework assignments',
+                'Active in discussion groups',
+                'Building friendships with classmates',
+            ],
+            'membership_class' => [
+                'Enrolled in membership class',
+                'Reviewed church vision and values',
+                'Signed church covenant',
+                'Completed membership interview',
+                'Joined a life group',
+            ],
+            'maturity_class' => [
+                'Studying spiritual disciplines',
+                'Practicing daily devotions',
+                'Growing in prayer life',
+                'Reading through Bible systematically',
+                'Mentoring newer believers',
+            ],
+            'leadership_training' => [
+                'Enrolled in leadership training',
+                'Demonstrating servant leadership',
+                'Participating in ministry projects',
+                'Completing leadership assessments',
+                'Shadowing current leaders',
+            ],
+            'serving' => [
+                'Active in ministry team',
+                'Leading small group',
+                'Serving weekly',
+                'Training new volunteers',
+                'Making significant impact',
+            ],
+        ];
+
+        $notes = $progressNotes[$stage] ?? ['Progress recorded'];
+
+        if ($isCompleted) {
+            $notes[] = 'Stage completed successfully';
+            $notes[] = 'Ready to move to next stage';
+        } else {
+            $notes[] = 'Currently in progress';
+            $notes[] = 'Regular check-ins scheduled';
+        }
+
+        return implode('. ', array_slice($notes, 0, rand(3, 5))) . '.';
     }
 }
