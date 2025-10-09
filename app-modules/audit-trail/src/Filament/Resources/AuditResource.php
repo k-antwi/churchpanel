@@ -4,8 +4,10 @@ namespace ChurchPanel\AuditTrail\Filament\Resources;
 
 use BackedEnum;
 use ChurchPanel\AuditTrail\Models\AuditLog;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -69,7 +71,68 @@ class AuditResource extends Resource
             ])
             ->defaultSort('happened_at', 'desc')
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('event_type')
+                    ->options([
+                        'Created' => 'Created',
+                        'Updated' => 'Updated',
+                        'Deleted' => 'Deleted',
+                    ])
+                    ->attribute('type')
+                    ->query(function (Builder $query, array $data) {
+                        if (!$data['value']) {
+                            return $query;
+                        }
+
+                        return $query->where('type', match($data['value']) {
+                            'Created' => 'ChurchPanel\AuditTrail\Events\ModelCreated',
+                            'Updated' => 'ChurchPanel\AuditTrail\Events\ModelUpdated',
+                            'Deleted' => 'ChurchPanel\AuditTrail\Events\ModelDeleted',
+                            default => null,
+                        });
+                    }),
+
+                Tables\Filters\Filter::make('model_type')
+                    ->form([
+                        \Filament\Forms\Components\Select::make('model')
+                            ->options([
+                                'Church' => 'Church',
+                                'Branch' => 'Branch',
+                                'Person' => 'Person',
+                                'Contact' => 'Contact',
+                                'Event' => 'Event',
+                                'ServiceType' => 'Service Type',
+                                'WellbeingRecord' => 'Wellbeing Record',
+                            ])
+                            ->placeholder('All Models'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query->when(
+                            $data['model'],
+                            fn (Builder $query, $model): Builder => $query->whereJsonContains('data->model_type', $model)
+                        );
+                    }),
+
+                Tables\Filters\Filter::make('date_range')
+                    ->form([
+                        \Filament\Forms\Components\DatePicker::make('from')
+                            ->label('From Date'),
+                        \Filament\Forms\Components\DatePicker::make('until')
+                            ->label('Until Date'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['from'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('happened_at', '>=', $date),
+                            )
+                            ->when(
+                                $data['until'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('happened_at', '<=', $date),
+                            );
+                    }),
+            ])
+            ->recordActions([
+                ViewAction::make(),
             ]);
     }
 
@@ -92,6 +155,7 @@ class AuditResource extends Resource
     {
         return [
             'index' => \ChurchPanel\AuditTrail\Filament\Resources\AuditResource\Pages\ListAudits::route('/'),
+            'view' => \ChurchPanel\AuditTrail\Filament\Resources\AuditResource\Pages\ViewAudit::route('/{record}'),
         ];
     }
 }
